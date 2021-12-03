@@ -17,10 +17,10 @@ services:
         image: mysql
         restart: always
         environment:
-          MYSQL_ROOT_PASSWORD: admin1
+          MYSQL_ROOT_PASSWORD: Admin123!
           MYSQL_DATABASE: ajc
           MYSQL_USER: admin
-          MYSQL_PASSWORD: admin1
+          MYSQL_PASSWORD: Admin123!
         ports:
             - "9906:3306"
 
