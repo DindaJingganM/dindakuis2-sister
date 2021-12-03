@@ -1,7 +1,7 @@
 version: '3.8'
 services:
     app:
-        image: dindajinggan07/kuis2
+        image: dindajinggan07/kuis2-Sister
         container_name: web-server
         build:
             context: ./php
