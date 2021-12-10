@@ -1,31 +1,35 @@
+version: '3.8'
 services:
-    php-apache-environment:
-        image: dindakuis2
-        container_name: php-apache
+    app:
+        image: 2006002501/dindakuis2
+        container_name: web-server
+        build: 
+            context: ./php
+            dockerfile: Dockerfile
         depends_on:
             - db
         volumes:
-            - ./dindakuis2/:/var/www/html/
+            - ./php/src:/var/www/html/
         ports:
             - 8000:80
-        networks:
-            - backend
+
     db:
-        container_name: mysql-db
+        container_name: db
         image: mysql
         restart: always
         environment:
           MYSQL_ROOT_PASSWORD: Admin123!
           MYSQL_DATABASE: ajc
+          MYSQL_USER: admin
+          MYSQL_PASSWORD: Admin123!
         ports:
-            - "3306:3306"
-        volumes:
-          - db:/var/lib/mysql
-          - ./dindakuis2/ajc.sql:/docker-entrypoint-initdb.d/ajc.sql
-        networks:
-          - backend
-volumes:
- db:
-networks:
- backend:
-  name: backend-network
+            - "9906:3306"
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        ports:
+            - '3060:80'
+        restart: always
+        environment:
+            PMA_HOST: db
+        depends_on:
+            - db
